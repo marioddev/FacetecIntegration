@@ -3,7 +3,7 @@ export var Config = (function () {
     // REQUIRED
     // Available at https://dev.facetec.com/account
     // NOTE: This field is auto-populated by the FaceTec SDK Configuration Wizard.
-    var DeviceKeyIdentifier = "dE0weDY7McA3a0DDh5Duw3hWV66qFhJX";
+    var DeviceKeyIdentifier = process.env.DEVICE_KEY_IDENTIFIER || "dE0weDY7McA3a0DDh5Duw3hWV66qFhJX";
 
     // -------------------------------------
     // REQUIRED
@@ -11,14 +11,14 @@ export var Config = (function () {
     // In Production, you likely will handle network requests elsewhere and without the use of this variable.
     // See https://dev.facetec.com/security-best-practices?link=facetec-server-rest-endpoint-security for more information.
     // NOTE: This field is auto-populated by the FaceTec SDK Configuration Wizard.
-    var BaseURL = "https://api.facetec.com/api/v3.1/biometrics";
-    var BaseURLAPI = "https://localhost:7101/api/FaceTec";
+    var BaseURL = process.env.BASE_URL || "https://api.facetec.com/api/v3.1/biometrics";
+    var BaseURLAPI = process.env.BASE_URL_API || "https://localhost:7101/api/FaceTec";
     // -------------------------------------
     // REQUIRED
     // The FaceScan Encryption Key you define for your application.
     // Please see https://dev.facetec.com/facemap-encryption-keys for more information.
     // NOTE: This field is auto-populated by the FaceTec SDK Configuration Wizard.
-    var PublicFaceScanEncryptionKey =
+    var PublicFaceScanEncryptionKey = process.env.PUBLIC_FACE_SCAN_ENCRYPTION_KEY || 
         "-----BEGIN PUBLIC KEY-----\n" +
         "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5PxZ3DLj+zP6T6HFgzzk\n" +
         "M77LdzP3fojBoLasw7EfzvLMnJNUlyRb5m8e5QyyJxI+wRjsALHvFgLzGwxM8ehz\n" +
@@ -27,8 +27,7 @@ export var Config = (function () {
         "GJD4GIVvR+j12gXAaftj3ahfYxioBH7F7HQxzmWkwDyn3bqU54eaiB7f0ftsPpWM\n" +
         "ceUaqkL2DZUvgN0efEJjnWy5y1/Gkq5GGWCROI9XG/SwXJ30BbVUehTbVcD70+ZF\n" +
         "8QIDAQAB\n" +
-        "-----END PUBLIC KEY-----"    
-        ;
+        "-----END PUBLIC KEY-----";
 
     
     // -------------------------------------

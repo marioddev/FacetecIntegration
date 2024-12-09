@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/86e9125a-8ee3-44ba-9e9b-547a4eb33a68/resourceGroups/DefaultResourceGroup-EUS2/providers/Microsoft.Web/sites/FaceTecIntegration",
+    "appService.deploySubpath": "."
+}
