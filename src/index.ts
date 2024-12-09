@@ -14,7 +14,11 @@ export class MyApp {
         FaceTecSDK.initializeInDevelopmentMode(Config.DeviceKeyIdentifier, Config.PublicFaceScanEncryptionKey, 
             function(inicializationSuccessfull:boolean){
                 console.log("Iniciation Successfull: " + inicializationSuccessfull);
-
+                if (!inicializationSuccessfull) {
+                    console.error(Config.DeviceKeyIdentifier);
+                    console.error(Config.PublicFaceScanEncryptionKey);
+                    console.error("FaceTec SDK initialization failed. Please check your Device Key Identifier and Public Face Scan Encryption Key.");
+                }
             }
         );
     }
