@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "FaceTec, Inc",
   "main": "src/index.ts",
-  "scripts": {    
+  "scripts": {
     "facetec-browser-sdk": "http-server -S -C src/Certificados/cert.pem -K src/Certificados/key.pem -p 63906",
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
@@ -17,6 +17,7 @@
     "@types/node": "^22.10.1",
     "@types/webpack": "^5.28.5",
     "@webpack-cli/generators": "^3.0.7",
+    "dotenv-webpack": "^8.1.0",
     "http-server": "^14.1.1",
     "ts-loader": "^9.5.1",
     "typescript": "^5.7.2",

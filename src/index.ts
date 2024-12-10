@@ -2,6 +2,7 @@ import {FaceTecSDK} from '../core-sdk/FaceTecSDK.js/FaceTecSDK';
 import type { FaceTecSessionResult,FaceTecFaceScanResultCallback,FaceTecFaceScanProcessor} from '../core-sdk/FaceTecSDK.js/FaceTecPublicApi';
 import { Config } from '../Config';
 import { LivenessCheckProcessor } from '../processors/LivenessCheckProcessor';
+//require('dotenv').config();
 
 export class MyApp {
     

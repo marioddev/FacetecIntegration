@@ -1,7 +1,8 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require('path');
-
+const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
 const isProduction = process.env.NODE_ENV == 'production';
 
 
@@ -13,6 +14,13 @@ const config = {
     plugins: [
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
+        new Dotenv(),
+        new webpack.DefinePlugin({
+            'process.env.DEVICE_KEY_IDENTIFIER': JSON.stringify(process.env.DEVICE_KEY_IDENTIFIER),
+            'process.env.BASE_URL': JSON.stringify(process.env.BASE_URL),
+            'process.env.BASE_URL_API': JSON.stringify(process.env.BASE_URL_API),
+            'process.env.PUBLIC_FACE_SCAN_ENCRYPTION_KEY': JSON.stringify(process.env.PUBLIC_FACE_SCAN_ENCRYPTION_KEY)
+        })
     ],
     module: {
         rules: [
