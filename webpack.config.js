@@ -10,6 +10,8 @@ const config = {
     entry: './src/index.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
+        publicPath: 'dist', // Asegúrate de que los recursos se sirvan desde la raíz del sitio
+        //filename: '[name].bundle.js',
     },
     plugins: [
         // Add your plugins here
@@ -36,6 +38,11 @@ const config = {
 
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
+            {
+                test: /\.(data|wasm)$/, // Maneja archivos .data y .wasm
+                type: 'asset/resource', // Usa Webpack 5's asset/resource
+            },
+
         ],
     },
     resolve: {

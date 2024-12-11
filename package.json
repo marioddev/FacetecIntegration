@@ -4,6 +4,9 @@
   "author": "FaceTec, Inc",
   "main": "src/index.ts",
   "scripts": {
+    "start": "live-server --port=8088 --host=localhost --open=/index.html",
+    "start:dev": "live-server --port=8088 --host=localhost --open=/index.html",
+    "start:prod": "live-server --port=8088 --host=localhost --open=/index.html",
     "facetec-browser-sdk": "http-server -S -C src/Certificados/cert.pem -K src/Certificados/key.pem -p 63906",
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
@@ -11,6 +14,7 @@
     "watch": "webpack --watch"
   },
   "dependencies": {
+    "axios": "^1.7.9",
     "live-server": "^1.2.1"
   },
   "devDependencies": {
