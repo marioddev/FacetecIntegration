@@ -1,3 +1,19 @@
+export const msalConfig = {
+    auth: {
+        clientId: "1e95574c-1bba-4b3c-9d25-e5cf6d7b61df", // ID de tu aplicación registrada en Azure AD
+        authority: "https://login.microsoftonline.com/4736a7fd-563e-41ca-89e0-3741563f325f", // ID del Tenant o "common"
+        redirectUri: "https://facetecintegration-dkgpa6f4gph0fhbf.eastus2-01.azurewebsites.net/" // URL de redirección, registrada en Azure AD
+    },
+    cache: {
+        cacheLocation: "localStorage", // O "sessionStorage"
+        storeAuthStateInCookie: false
+    }
+};
+
+export const loginRequest = {
+    scopes: ["openid", "profile", "User.Read"] // Scopes requeridos
+};
+
 
 export var Config = (function () {
     // -------------------------------------
@@ -191,3 +207,5 @@ export var Config = (function () {
 
     
 })();
+
+

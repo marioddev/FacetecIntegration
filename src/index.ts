@@ -3,15 +3,12 @@ import type { FaceTecSessionResult,FaceTecFaceScanResultCallback,FaceTecFaceScan
 import { Config } from '../Config';
 import { LivenessCheckProcessor } from '../processors/LivenessCheckProcessor';
 import axios from '../node_modules/axios/index';
-//require('dotenv').config();
-
-
+import { login, getToken } from "../auth";
 
 
 export class MyApp {
     public tenantId = '4736a7fd-563e-41ca-89e0-3741563f325f'; // Reemplaza con tu tenant ID
     public openIdConfigUrl = `https://login.microsoftonline.com/${this.tenantId}/v2.0/.well-known/openid-configuration`;
-
     //init
     public init = ():void => {
         FaceTecSDK.setResourceDirectory("../core-sdk/FaceTecSDK.js/resources");
@@ -63,12 +60,29 @@ export class MyApp {
         XHR.send();
     }
     
+    
+    // Manejo del callback de autenticación
+    async handleCallback() {
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        const state = params.get('state');
+    
+        if (!code) {
+            console.error('Faltan parámetros en el callback');
+            return;
+        }   
+    }
 }
 
 
 
-window.onload = ():void => {
+window.onload = async ():Promise<void> => {
     const myFaceTecApp = new MyApp();
     myFaceTecApp.init();
     (window as any).MyFaceTecApp = myFaceTecApp;
+    const token = await getToken();
+    console.log("Token de acceso:", token);
 }
+
+
+

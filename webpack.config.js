@@ -5,6 +5,19 @@ const Dotenv = require('dotenv-webpack');
 const webpack = require('webpack');
 const isProduction = process.env.NODE_ENV == 'production';
 
+const openIDConfig = {
+    issuer: process.env.URL_ISSUER || "https://192.168.100.6:63906",
+    authorization_endpoint: (process.env.URL_ISSUER || "https://192.168.100.6:63906")+ "/authorize",
+    token_endpoint: (process.env.URL_ISSUER || "https://192.168.100.6:63906")+ "/token",
+    userinfo_endpoint: (process.env.URL_ISSUER || "https://192.168.100.6:63906")+ "/userinfo",
+    jwks_uri: (process.env.URL_ISSUER || "https://192.168.100.6:63906")+ "/.well-known/jwks.json",
+    response_types_supported: ["code", "token", "id_token"],
+    subject_types_supported: ["public"],
+    id_token_signing_alg_values_supported: ["RS256"],
+    scopes_supported: ["openid", "profile", "email"],
+    token_endpoint_auth_methods_supported: ["client_secret_basic", "client_secret_post"],
+    claims_supported: ["sub", "iss", "aud", "exp", "iat", "auth_time", "nonce", "name", "email"]
+};
 
 const config = {
     entry: './src/index.ts',
@@ -27,7 +40,7 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.(ts|tsx)$/i,
+                test: /\.(ts|tsx|js)$/i,
                 loader: 'ts-loader',
                 exclude: ['/node_modules/'],
             },
@@ -38,10 +51,10 @@ const config = {
 
             // Add your rules for custom modules here
             // Learn more about loaders from https://webpack.js.org/loaders/
-            {
-                test: /\.(data|wasm)$/, // Maneja archivos .data y .wasm
-                type: 'asset/resource', // Usa Webpack 5's asset/resource
-            },
+            // {
+            //     test: /\.(data|wasm)$/, // Maneja archivos .data y .wasm
+            //     type: 'asset/resource', // Usa Webpack 5's asset/resource
+            // },
 
         ],
     },
@@ -58,7 +71,18 @@ const config = {
         key: './key.pem', // Ruta a tu archivo key.pem
         cert: './cert.pem' // Ruta a tu archivo cert.pem
       },
-      open: true // Opcional: abrir automáticamente en el navegador
+      open: true, // Opcional: abrir automáticamente en el navegador
+      setupMiddlewares: (middlewares, devServer) => {
+            if (!devServer) {
+                throw new Error('webpack-dev-server is not defined');
+            }
+
+            devServer.app.get('/.well-known/openid-configuration', (req, res) => {
+                res.json(openIDConfig);
+            });
+
+            return middlewares;
+        }
     }
 };
 
