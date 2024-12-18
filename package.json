@@ -2,9 +2,9 @@
   "name": "my-webpack-project",
   "version": "1.0.0",
   "author": "FaceTec, Inc",
-  "main": "src/index.ts",
+  "main": "server.js",
   "scripts": {
-    "start": "live-server --port=8088 --host=localhost --open=/index.html",
+    "start": "node server.js",
     "start:dev": "live-server --port=8088 --host=localhost --open=/index.html",
     "start:prod": "live-server --port=8088 --host=localhost --open=/index.html",
     "facetec-browser-sdk": "http-server -S -C src/Certificados/cert.pem -K src/Certificados/key.pem -p 63906",
@@ -16,7 +16,8 @@
   "dependencies": {
     "@azure/msal-browser": "^3.27.0",
     "axios": "^1.7.9",
-    "live-server": "^1.2.1"
+    "live-server": "^1.2.1",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.7",
