@@ -1,3 +1,4 @@
+
 export const msalConfig = {
     auth: {
         clientId: "1e95574c-1bba-4b3c-9d25-e5cf6d7b61df", // ID de tu aplicación registrada en Azure AD
@@ -207,5 +208,4 @@ export var Config = (function () {
 
     
 })();
-
 

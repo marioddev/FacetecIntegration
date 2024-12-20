@@ -4,11 +4,11 @@ const webpack = require('webpack');
 const isProduction = process.env.NODE_ENV == 'production';
 
 const config = {
-    entry: './src/index.ts',
+    entry: './src/index2.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
-        publicPath: '/',
+        filename: 'main.js',
+        publicPath: '/dist',
     },
     plugins: [
         new Dotenv(),
@@ -34,6 +34,19 @@ const config = {
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
+        alias: {
+            util: require.resolve("util/"),
+            stream: require.resolve("stream-browserify"),
+            path: require.resolve("path-browserify"),
+            url: require.resolve("url/"),
+            fs: false,
+            querystring: require.resolve("querystring-es3"),
+            http: false,
+            crypto: require.resolve("crypto-browserify"),
+            zlib: require.resolve("browserify-zlib"),
+            net: false,
+            assert: require.resolve("assert/")
+        }
     },
     devServer: {
         static: {
@@ -42,6 +55,29 @@ const config = {
         compress: true,
         port: 8001,
         open: true,
+        // setupMiddlewares: (middlewares, devServer) => {
+        //     if (!devServer) {
+        //         throw new Error('webpack-dev-server is not defined');
+        //     }
+
+        //     devServer.app.get('/.well-known/openid-configuration', (req, res) => {
+        //         res.json({
+        //             issuer: process.env.URL_ISSUER || "https://192.168.100.6:63906",
+        //             authorization_endpoint: (process.env.URL_ISSUER || "https://192.168.100.6:63906") + "/authorize",
+        //             token_endpoint: (process.env.URL_ISSUER || "https://192.168.100.6:63906") + "/token",
+        //             userinfo_endpoint: (process.env.URL_ISSUER || "https://192.168.100.6:63906") + "/userinfo",
+        //             jwks_uri: (process.env.URL_ISSUER || "https://192.168.100.6:63906") + "/.well-known/jwks.json",
+        //             response_types_supported: ["code", "token", "id_token"],
+        //             subject_types_supported: ["public"],
+        //             id_token_signing_alg_values_supported: ["RS256"],
+        //             scopes_supported: ["openid", "profile", "email"],
+        //             token_endpoint_auth_methods_supported: ["client_secret_basic", "client_secret_post"],
+        //             claims_supported: ["sub", "iss", "aud", "exp", "iat", "auth_time", "nonce", "name", "email"]
+        //         });
+        //     });
+
+        //     return middlewares;
+        // }
     }
 };
 

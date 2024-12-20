@@ -1,12 +1,22 @@
 {
+  // "compilerOptions": {
+  //   "allowSyntheticDefaultImports": true,
+  //   "noImplicitAny": true,
+  //   "module": "es6",
+  //   "target": "es5",
+  //   "allowJs": true,
+  //   "outDir": "./dist",    
+  // },
+  // "exclude": ["dist"],
+  // "files": ["src/index2.ts"]
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
     "allowJs": true,
-    "outDir": "./dist"
   },
-  "exclude": ["dist"],
-  "files": ["src/index.ts"]
+  "include": ["./src/**/*"],
+  "exclude": ["dist"]
 }

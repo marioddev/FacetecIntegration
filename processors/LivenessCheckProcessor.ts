@@ -2,9 +2,10 @@
 // Welcome to the annotated FaceTec Device SDK core code for performing secure Liveness Checks!
 //
 
-import { Config } from "../Config";
+
 import { FaceTecSDK } from "../core-sdk/FaceTecSDK.js/FaceTecSDK";
 import type { FaceTecSessionResult, FaceTecFaceScanResultCallback, FaceTecFaceScanProcessor } from "../core-sdk/FaceTecSDK.js/FaceTecPublicApi";
+import { Config } from "../Config";
 
 
 //
@@ -83,6 +84,15 @@ export class LivenessCheckProcessor implements FaceTecFaceScanProcessor {
 
     this.latestNetworkRequest.setRequestHeader("X-Device-Key", Config.DeviceKeyIdentifier);
     this.latestNetworkRequest.setRequestHeader("X-User-Agent", FaceTecSDK.createFaceTecAPIUserAgentString(sessionResult.sessionId as string));
+
+    const token = sessionStorage.getItem("jwtToken");
+    const redirectUrl = sessionStorage.getItem("redirectUrl");
+    if (token) {
+      this.latestNetworkRequest.setRequestHeader("jwtToken", token);
+    }
+    if (redirectUrl) {
+      this.latestNetworkRequest.setRequestHeader("redirectUrl", redirectUrl);
+    }
 
     this.latestNetworkRequest.onreadystatechange = (): void => {
       //
